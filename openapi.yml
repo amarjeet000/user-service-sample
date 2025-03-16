@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: Sample User Service
+  version: 1.0.0
+servers:
+  - url: "http://127.0.0.1:3030/api"
+tags:
+  - name: Users
+    description: To fetch users.
+  - name: Auth
+    description: To issue token.
+paths:
+  /user:
+    get:
+      tags:
+        - Users
+      summary: "Fetch existing users, filtering the user who is making the request."
+      description: ""
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success: An array of sample users"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    username:
+                      type: object
+              example:
+                - id: "user1"
+                  username: "john.doe"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                code:
+                  value: "SERVER_ERROR"
+                message:
+                  value: "Unexpected server error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                code:
+                  value: "INVALID_TOKEN"
+                message:
+                  value: "Invalid API Key"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                code:
+                  value: "ACCESS_DENIED"
+                message:
+                  value: "Forbidden. Insufficient Permissions"
+        "204":
+          description: No content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                code:
+                  value: "NO_CONTENT"
+                message:
+                  value: "No users found"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                code:
+                  value: "BAD_REQUEST_DATA"
+                message:
+                  value: "Bad API key"
+
+  /token:
+    get:
+      tags:
+        - Auth
+      summary: "Issue a new jwt access token"
+      description: ""
+      responses:
+        "200":
+          description: "Success: A valid token"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+              example:
+                - token: "_jwt_token_"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                code:
+                  value: "SERVER_ERROR"
+                message:
+                  value: "Unexpected server error"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

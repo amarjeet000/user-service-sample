@@ -1,0 +1,17 @@
+services:
+  userservice:
+    platform: linux/amd64
+    #image: amarjeet/user-service:latest
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3030:3030"
+    stop_grace_period: 30s
+    volumes:
+      - ./service_config:/service_config:ro
+      - ./keys:/keys:ro
+    environment:
+      - PORT=3030
+      - SIGNING_METHOD=rsa
