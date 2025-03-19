@@ -120,7 +120,7 @@ paths:
     get:
       tags:
         - Auth
-      summary: "Issue a new jwt access token"
+      summary: "Issue a new jwt token"
       description: ""
       responses:
         "200":

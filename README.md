@@ -10,7 +10,7 @@ The OpenAPI spec is available at https://github.com/amarjeet000/user-mgmnt-servi
 
 The service exposes two endpoints
 - GET `/api/users`: Returns a list of users. Requires JWT based authentication.
-- GET `/api/token`: This is an optional endpoint, which returns a JWT access token, but not needed to run or test the service. If you wish to use this endpoint, check the details at the bottom under [Using token endpoint](#Using-token-endpoint) section.
+- GET `/api/token`: This is an optional endpoint, which returns a JWT token, but not needed to run or test the service. If you wish to use this endpoint, check the details at the bottom under [Using token endpoint](#Using-token-endpoint) section.
 
 ### Run the service
 There are two ways you can run the service.
