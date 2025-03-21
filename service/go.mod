@@ -26,8 +26,7 @@ require (
 
 require (
 	github.com/go-chi/chi/v5 v5.2.1
-	github.com/go-chi/cors v1.2.1
-	github.com/golang-jwt/jwt/v5 v5.2.1
+	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/spf13/viper v1.19.0
 	golang.org/x/sys v0.30.0 // indirect
 )
